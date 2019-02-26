@@ -1,0 +1,61 @@
+type User {
+  _id: ID
+  username: String! @unique
+  name: String
+  email: String!
+  password: String!
+  avatar: String
+  joinDate: String
+  memberType: String
+  height: Int
+  weight: Int
+  age: Int
+  workouts: [Workout]
+}
+
+type Workout {
+  title: String!
+  intensity: Int!
+  muscleGroup: [String]
+  exercises: [Exercise]
+  createdDate: String
+  createdBy: User!
+  completionTime: String
+  wasFinished: Boolean
+  notes: [Notes]
+}
+
+type Exercise {
+  title: String!
+  muscleGroup: [String]!
+  description: String!
+  value: Int!
+  reps: Int
+  time: Int
+  weight: Int
+  cardioLevel: Int
+  flexibilityLevel: Int
+  strengthLevel: Int
+  difficulty: Int
+  imageUrl: String
+  videoUrl: String
+}
+
+type Notes {
+  _id: ID
+  notesBody: String!
+}
+
+type Mutation {
+  signinUser(username: String!, password: String!): Token
+  signupUser(username: String!, email: String!, password: String!): Token
+  createExercise( title: String! muscleGroup: [String]! description: String! value: Int!): Exercise!
+}
+
+type Token {
+  token: String!
+}
+
+type Query {
+  getExercises: [Exercise]
+}
